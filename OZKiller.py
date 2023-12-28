@@ -100,7 +100,7 @@ if Answer[0: 7].lower() == 'setting':
     TurnSpawnEnemy = 3
     TurnSpawnChest = 3
     ChanceKilling = '1/2'
-    if Answer.lower() == 'Setting+':
+    if Answer.lower() == 'setting+':
         TurnSpawnEnemy = int(input('Enter turn when enemies will appear: '))
         TurnSpawnChest = int(input('Enter turn when chest will appear: '))
         ChanceKilling = input('Enter the probability (for example \'1/3\') of a die next to an enemy: ')
