@@ -2,30 +2,29 @@ from random import randint
 def create_Table(DiagramSplitSymbol, DiagramDivideSymbol, DiagramSpaceSymbol, PrintSymbolLine, PrintSymbolCell, MaxSymbol, DiagramSetting):
     Table = DiagramSetting.split(DiagramSplitSymbol)
     for y in range(len(Table)):
-        if Table[y] == '':
-            Table.pop(y)
+        if Table[0] == '':
+            Table.pop(0)
         else:
-            continue
+            Table.append(Table[0])
+            Table.pop(0)
 
-    a = {'key': 0}
+    a = {0: 0}
     i = 0
     for x in range(len(Table)):
         if Table[x].find('\x1b') >= 0:
-            a['key'] = Table[x]
-            c = a['key'][5:]
+            a[0] = Table[x]
+            c = a[0][5:]
         else:
-            a['key'] = Table[x]
-            c = a['key']
+            a[0] = Table[x]
+            c = a[0]
 
         if MaxSymbol > 0:
             if len(c) % 2 == 0:
-                sint = ((MaxSymbol - len(c)) // 2) + 1
-                eint = sint
+                s = ' ' * ((MaxSymbol - len(c)) // 2) + 1
+                e = s
             else:
-                sint = round((MaxSymbol - len(c)) // 2)
-                eint = sint + 1
-            s = ' ' * sint
-            e = ' ' * eint
+                s = ' ' * round((MaxSymbol - len(c)) // 2)
+                e = s + ' '
         else:
             s = ''
             e = ''
@@ -45,11 +44,11 @@ def create_Table(DiagramSplitSymbol, DiagramDivideSymbol, DiagramSpaceSymbol, Pr
                 print('')
             i = 0
         elif Table[x].find(DiagramSpaceSymbol) != -1:
-            SpaceString = int(a['key'].replace(DiagramSpaceSymbol, ''))
+            SpaceString = int(a[0].replace(DiagramSpaceSymbol, ''))
             print(' ' * SpaceString, end='')
             i += 1
         else:
-            print(f'{s}{a['key']}{e}', end='')
+            print(f'{s}{a[0]}{e}', end='')
             i += 1
 
 def InventoryChecker(Inventory0, Inventory1, Inventory2):
